@@ -10,7 +10,6 @@ const createUser = async (req, res) => {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             username: req.body.username,
-            company: req.body.company,
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, 10)
         }
@@ -42,9 +41,8 @@ const createUser = async (req, res) => {
 //login and send user token and refresh token to client
 const loginUser = async (req, res) => {
     try {
+        console.log(req.body)
         const user = await UserService.findAndVerifyUser(req.body.username, req.body.password);
-
-        const companyName = user.company.charAt(0).toUpperCase() + user.company.substring(1); //uppercase senitive
         const email = user.email;
         const password = req.body.password;
 
@@ -102,17 +100,10 @@ const logoutUser = async (req, res) => {
             })
         }
     } catch (error) {
-        if (error.message === 'Cant find User Company details') {
-            return res.status(404).json({
-                title: 'Cant find User Company details',
-                error: error.message
-            });
-        } else {
             return res.status(500).json({
                 title: 'server error',
                 error: error.message
             });
-        }
     }
 }
 
@@ -138,17 +129,10 @@ const verifytoken = async (req, res) => {
         }
 
     } catch (error) {
-        if (error.message === 'Cant find User Company details') {
-            return res.status(404).json({
-                title: 'Cant find User Company details',
-                error: error.message
-            });
-        } else {
             return res.status(500).json({
                 title: 'server error',
                 error: error.message
             });
-        }
     }
 }
 

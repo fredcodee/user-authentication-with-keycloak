@@ -7,7 +7,7 @@
         <form @submit.prevent="login" id="loginForm">
           <div class="form-group input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input class="form-control" type="text" name='mobile' required placeholder="Mobile Number" v-model = "mobile" />
+            <input class="form-control" type="text" name='username' required placeholder="Username" v-model = "username" />
           </div>
           <div class="form-group input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -42,7 +42,7 @@ export default {
 
   data() {
     return {
-      mobile: '',
+      username: '',
       password: '',
       error: null
     };
@@ -50,7 +50,7 @@ export default {
   methods: {
      login() {
         let User = {
-          mobile: this.mobile,
+          username: this.username,
           password: this.password
         };
         axios.post(import.meta.env.VITE_APP_API + "/login", User)

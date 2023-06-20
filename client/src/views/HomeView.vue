@@ -6,8 +6,7 @@
   <Navbar/>
   <div class="container">
     <h3>
-      
+      Keycloak Connected
     </h3>
-    <!-- <p>{{$store.state.authentication}}</p> -->
   </div>
 </template>
